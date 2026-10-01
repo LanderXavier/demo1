@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generador de Videos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-rose-50/70 via-pink-50/30 to-purple-50/30 text-stone-700 min-h-screen p-5 md:p-10 flex flex-col items-center antialiased">
+
+  <!-- Header Femenino y Clean -->
+  <header class="text-center mb-8 max-w-xl">
+    
+    <h1 class="text-2xl md:text-3xl font-bold tracking-tight text-stone-800">
+      Generador de video
+    </h1>
+  </header>
+
+  <!-- Contenedor Principal -->
+  <main class="grid grid-cols-1 md:grid-cols-12 gap-8 max-w-5xl w-full bg-white/80 backdrop-blur-sm border border-rose-100/80 p-6 md:p-8 rounded-3xl shadow-xl shadow-pink-100/40">
+    
+    <!-- Configuración (7 cols) -->
+    <div class="md:col-span-7 space-y-6">
+      
+      <!-- Paso 1: Avatar -->
+      <div>
+        <label class="text-xs font-bold uppercase text-stone-500 tracking-wider flex items-center gap-2 mb-3">
+          <span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center text-[11px]">1</span>
+          Selecciona tu Portavoz
+        </label>
+        
+        <!-- Predefinidos -->
+        <div class="grid grid-cols-2 gap-3.5 mb-3.5">
+          <!-- Tarjeta Valeria -->
+          <div onclick="selectPreset('fa844d4715424ce19999464bc1dfa164', 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200', 'female')" 
+               id="card-valeria"
+               class="avatar-card cursor-pointer border-2 border-pink-400 bg-pink-50/50 p-3 rounded-2xl flex items-center gap-3 transition-all shadow-xs">
+            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=200" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs">
+            <div>
+              <p class="text-xs font-bold text-stone-800">Valeria</p>
+              <p class="text-[10px] text-pink-600 font-medium">Beauty & Glow</p>
+            </div>
+          </div>
+
+          <!-- Tarjeta Carlos -->
+          <div onclick="selectPreset('e98d9cb6fc30489998638b97d1956554', 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200', 'male')" 
+               id="card-carlos"
+               class="avatar-card cursor-pointer border border-rose-100 bg-stone-50/50 p-3 rounded-2xl flex items-center gap-3 transition-all opacity-60 hover:opacity-100">
+            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=200" class="w-12 h-12 rounded-full object-cover border-2 border-white shadow-xs">
+            <div>
+              <p class="text-xs font-bold text-stone-700">Carlos</p>
+              <p class="text-[10px] text-stone-400">Corporativo</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Subir Foto Nueva -->
+        <div class="bg-rose-50/40 border border-rose-100 p-3.5 rounded-2xl">
+          <span class="text-xs text-stone-600 font-medium flex items-center gap-1.5 mb-2">
+            <i class="fa-solid fa-camera text-pink-500 text-[11px]"></i> O sube el rostro de tu avatar:
+          </span>
+          <input type="file" id="imageInput" accept="image/*" onchange="handleFileChange(event)" 
+                 class="block w-full text-xs text-stone-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-pink-500 file:text-white hover:file:bg-pink-600 file:cursor-pointer cursor-pointer transition">
+        </div>
+      </div>
+
+      <!-- Paso 2: Campaña -->
+      <div>
+        <label class="text-xs font-bold uppercase text-stone-500 tracking-wider flex items-center gap-2 mb-3">
+          <span class="w-5 h-5 rounded-full bg-pink-500 text-white flex items-center justify-center text-[11px]">2</span>
+          Campaña del Día (15 seg)
+        </label>
+        
+        <div class="space-y-2.5">
+          <!-- Opción 1 -->
+          <label class="campaign-opt cursor-pointer flex items-center justify-between border-2 border-pink-400 bg-pink-50/40 p-3 rounded-2xl transition">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="campaign" value="acrilicos" checked class="accent-pink-500 w-4 h-4 cursor-pointer" onchange="updateScriptStyle()">
+              <span class="text-xs font-semibold text-stone-800">💅 Acrílicos 2x1 los Jueves</span>
+            </div>
+            <span class="text-[10px] font-medium text-pink-600 bg-white px-2 py-0.5 rounded-full border border-pink-100">Top Promo</span>
+          </label>
+
+          <!-- Opción 2 -->
+          <label class="campaign-opt cursor-pointer flex items-center justify-between border border-rose-100 bg-white p-3 rounded-2xl transition hover:border-pink-200">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="campaign" value="limpieza" class="accent-pink-500 w-4 h-4 cursor-pointer" onchange="updateScriptStyle()">
+              <span class="text-xs font-medium text-stone-700">✨ Limpieza Facial de Regalo (> $15)</span>
+            </div>
+            <span class="text-[10px] text-stone-400">Skincare</span>
+          </label>
+
+          <!-- Opción 3 -->
+          <label class="campaign-opt cursor-pointer flex items-center justify-between border border-rose-100 bg-white p-3 rounded-2xl transition hover:border-pink-200">
+            <div class="flex items-center gap-2">
+              <input type="radio" name="campaign" value="cocteles" class="accent-pink-500 w-4 h-4 cursor-pointer" onchange="updateScriptStyle()">
+              <span class="text-xs font-medium text-stone-700">🌸 Miércoles de Mocktails Soft Free</span>
+            </div>
+            <span class="text-[10px] text-stone-400">Social</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Botón de Generar -->
+      <button onclick="generarVideoReal()" id="btnAction" 
+              class="w-full py-3.5 bg-gradient-to-r from-pink-500 to-rose-400 hover:from-pink-600 hover:to-rose-500 text-white font-semibold text-xs uppercase tracking-wider rounded-2xl transition shadow-lg shadow-pink-200 active:scale-[0.99] flex items-center justify-center gap-2 cursor-pointer">
+        <i class="fa-solid fa-wand-magic-sparkles text-sm"></i> Generar video
+      </button>
+
+    </div>
+
+    <!-- Visor 9:16 (5 cols) -->
+    <div class="md:col-span-5 flex flex-col items-center justify-center">
+      <div class="w-full max-w-[270px] bg-white border border-rose-100 p-4 rounded-3xl shadow-md shadow-pink-100/30 flex flex-col items-center">
+        
+        <!-- Header Visor -->
+        <div class="w-full flex items-center justify-between text-[11px] text-stone-400 mb-3 px-1">
+          <span class="flex items-center gap-1.5 font-medium text-pink-600">
+            <span class="w-1.5 h-1.5 rounded-full bg-pink-400 animate-pulse"></span> Formato Reels / Shorts
+          </span>
+          <span class="font-medium text-stone-500">9:16</span>
+        </div>
+
+        <!-- Ventana del Video -->
+        <div class="w-full aspect-[9/16] bg-rose-50/30 rounded-2xl overflow-hidden border border-rose-100 relative flex items-center justify-center shadow-inner">
+          
+          <!-- Vista estática inicial -->
+          <div id="staticBox" class="text-center p-4">
+            <img id="viewImg" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" 
+                 class="w-24 h-24 rounded-full object-cover mx-auto mb-3 border-4 border-white shadow-md">
+            <p id="viewName" class="text-xs font-semibold text-stone-800">Avatar Preparado</p>
+            <p class="text-[10px] text-stone-400 mt-1">Listo para animar</p>
+          </div>
+
+          <!-- Spinner durante procesamiento -->
+          <div id="loader" class="hidden absolute inset-0 bg-white/95 backdrop-blur-xs flex flex-col items-center justify-center text-center p-4 z-20">
+            <div class="w-8 h-8 border-3 border-pink-400 border-t-transparent rounded-full animate-spin mb-3"></div>
+            <p class="text-xs font-semibold text-pink-700" id="loaderText">Procesando contenido...</p>
+            <p class="text-[10px] text-stone-400 mt-1">Preparando la animación</p>
+          </div>
+
+          <!-- Video final generado -->
+          <video id="videoOut" class="hidden absolute inset-0 w-full h-full object-cover z-10" playsinline controls loop autoplay></video>
+
+        </div>
+
+        <!-- Feedback de estado -->
+        <p id="statusMsg" class="text-[11px] text-stone-400 mt-3 text-center">Listo para iniciar la prueba.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const BACKEND_URL = "http://localhost:8000";
+    let selectedPresetId = "fa844d4715424ce19999464bc1dfa164";
+    let selectedVoice = "female";
+    let uploadedFile = null;
+
+    function selectPreset(id, imgUrl, voice) {
+      selectedPresetId = id;
+      selectedVoice = voice;
+      uploadedFile = null;
+      document.getElementById('imageInput').value = "";
+
+      document.querySelectorAll('.avatar-card').forEach(c => {
+        c.className = "avatar-card cursor-pointer border border-rose-100 bg-stone-50/50 p-3 rounded-2xl flex items-center gap-3 transition-all opacity-60 hover:opacity-100";
+      });
+
+      const active = id.includes('fa844') ? document.getElementById('card-valeria') : document.getElementById('card-carlos');
+      active.className = "avatar-card cursor-pointer border-2 border-pink-400 bg-pink-50/50 p-3 rounded-2xl flex items-center gap-3 transition-all shadow-xs";
+
+      document.getElementById('viewImg').src = imgUrl;
+      document.getElementById('viewName').innerText = id.includes('fa844') ? "Valeria" : "Carlos";
+    }
+
+    function handleFileChange(e) {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      uploadedFile = file;
+      selectedPresetId = "";
+
+      document.querySelectorAll('.avatar-card').forEach(c => {
+        c.className = "avatar-card cursor-pointer border border-rose-100 bg-stone-50/50 p-3 rounded-2xl flex items-center gap-3 transition-all opacity-60 hover:opacity-100";
+      });
+
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        document.getElementById('viewImg').src = evt.target.result;
+        document.getElementById('viewName').innerText = "Rostro Personalizado";
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateScriptStyle() {
+      const labels = document.querySelectorAll('.campaign-opt');
+      labels.forEach(lbl => {
+        const radio = lbl.querySelector('input[type="radio"]');
+        if (radio.checked) {
+          lbl.className = "campaign-opt cursor-pointer flex items-center justify-between border-2 border-pink-400 bg-pink-50/40 p-3 rounded-2xl transition";
+        } else {
+          lbl.className = "campaign-opt cursor-pointer flex items-center justify-between border border-rose-100 bg-white p-3 rounded-2xl transition hover:border-pink-200";
+        }
+      });
+    }
+
+    async function createAvatarFromUploadedFile(file) {
+      const formData = new FormData();
+      formData.append("custom_image", file);
+
+      const res = await fetch(`${BACKEND_URL}/api/create-avatar`, {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        throw new Error(data.detail || "No se pudo crear el avatar con la imagen");
+      }
+
+      return data.talking_photo_id;
+    }
+
+    async function generarVideoReal() {
+      const campaign = document.querySelector('input[name="campaign"]:checked').value;
+      const loader = document.getElementById('loader');
+      const loaderText = document.getElementById('loaderText');
+      const video = document.getElementById('videoOut');
+      const statusMsg = document.getElementById('statusMsg');
+      const btn = document.getElementById('btnAction');
+
+      btn.disabled = true;
+      btn.classList.add('opacity-50', 'cursor-not-allowed');
+      loader.classList.remove('hidden');
+      video.classList.add('hidden');
+      video.pause();
+
+      statusMsg.innerText = "Procesando petición en el servidor...";
+
+      try {
+        let avatarId = selectedPresetId;
+
+        if (uploadedFile) {
+          loaderText.innerText = "Creando avatar desde la imagen...";
+          avatarId = await createAvatarFromUploadedFile(uploadedFile);
+          loaderText.innerText = "Avatar listo. Generando video...";
+        } else {
+          loaderText.innerText = "Subiendo y procesando avatar...";
+        }
+
+        const formData = new FormData();
+        formData.append("campaign_key", campaign);
+        formData.append("voice_gender", selectedVoice);
+        formData.append("preset_avatar_id", avatarId);
+
+        const res = await fetch(`${BACKEND_URL}/api/render-video`, {
+          method: "POST",
+          body: formData
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.detail || "Error en el servidor");
+        }
+
+        const data = await res.json();
+        const videoId = data.video_id;
+        loaderText.innerText = "Renderizando animación...";
+        statusMsg.innerText = `Procesando video (ID: ${videoId}). Esperando resultado...`;
+
+        const pollTimer = setInterval(async () => {
+          try {
+            const statusRes = await fetch(`${BACKEND_URL}/api/video-status/${videoId}`);
+            const statusData = await statusRes.json();
+
+            if (statusData.status === "completed") {
+              clearInterval(pollTimer);
+              loader.classList.add('hidden');
+              video.src = statusData.video_url;
+              video.classList.remove('hidden');
+              video.play();
+              statusMsg.innerText = "✨ ¡Video generado con éxito!";
+              btn.disabled = false;
+              btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else if (statusData.status === "failed") {
+              clearInterval(pollTimer);
+              loader.classList.add('hidden');
+              statusMsg.innerText = "Error: " + JSON.stringify(statusData.error);
+              btn.disabled = false;
+              btn.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+              loaderText.innerText = "Sincronizando malla facial (" + (statusData.status || "procesando") + ")...";
+            }
+          } catch (pollErr) {
+            clearInterval(pollTimer);
+            loader.classList.add('hidden');
+            statusMsg.innerText = "Error al verificar estado.";
+            btn.disabled = false;
+            btn.classList.remove('opacity-50', 'cursor-not-allowed');
+          }
+        }, 5000);
+
+      } catch (err) {
+        loader.classList.add('hidden');
+        statusMsg.innerText = "Error: " + err.message;
+        btn.disabled = false;
+        btn.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+    }
+  </script>
+</body>
+</html>
