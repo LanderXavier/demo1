@@ -32,10 +32,11 @@ demoavatar/
 - Pip
 - Una clave de API del servicio externo configurada en `back/.env`
 
-## 1) Clonar / entrar al proyecto
+## 1) Clonar el proyecto
 
 ```bash
-cd /home/lander/Lander/chamba/demoavatar
+git https://github.com/LanderXavier/demo1
+cd demoavatar
 ```
 
 ## 2) Instalar dependencias del backend
